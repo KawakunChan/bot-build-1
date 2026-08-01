@@ -26,7 +26,7 @@ jobs:
           curl -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/octet-stream" -o project.zip "$URL"
           mkdir -p project
           unzip -qq project.zip -d project
-          PUBSPEC=$(find project -maxdepth 5 -iname "pubspec.yaml" | head -1)
+          PUBSPEC=$(find project -maxdepth 8 -iname "pubspec.yaml" | head -1)
           if [ -z "$PUBSPEC" ]; then
             echo "pubspec.yaml tidak ditemukan di dalam ZIP"
             exit 1
