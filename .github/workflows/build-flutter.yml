@@ -35,6 +35,12 @@ jobs:
           PROJECT_ROOT=$(dirname "$PUBSPEC")
           echo "PROJECT_ROOT=$PROJECT_ROOT" >> $GITHUB_ENV
 
+      - name: Clean Stale Build Cache
+        run: |
+          cd "${{ env.PROJECT_ROOT }}"
+          rm -rf build .dart_tool android/.gradle android/build android/app/build ios/Pods ios/.symlinks
+          find . -iname "local.properties" -delete
+
       - name: Fix Android SDK Path
         run: echo "sdk.dir=$ANDROID_HOME" > "${{ env.PROJECT_ROOT }}/android/local.properties"
 
